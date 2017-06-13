@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+#searchTable input, select {
+	width: 200px;
+}
+
+#searchTable tr td {
+	border: 2px solid white;
+}
+
+#searchTable .lblClassLeft {
+	/* border: 1px solid red; */
+	padding-left: 50px;
+	width: 200x;
+	text-align: right;
+	width: 200x;
+}
+
+#searchTable .lblClassRight {
+	/* border: 1px solid green; */
+	width: 190px;
+}

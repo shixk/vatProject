@@ -1,0 +1,9 @@
+#btnAddCommit,#btnAddCancel,#btnEditCommit,#btnEditCancel,#btnDeleteCommit,#btnDeleteCancel,#btnDetailCancel,#btnSearch,#btnClear{
+	width:50px;
+} 
+#mydialog_add,#mydialog_edit,#mydialog_delete{
+	width:500px;
+} 
+table input,select{
+	width:300px;
+} 
