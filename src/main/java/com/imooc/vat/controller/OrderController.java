@@ -1,5 +1,43 @@
 package com.imooc.vat.controller;
 
-public class OrderController {
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.imooc.vat.entity.Orders;
+import com.imooc.vat.service.OrderService;
+
+@Controller
+@RequestMapping(value="/order")
+public class OrderController {
+	
+	@Autowired
+	private OrderService orderService;
+	
+	@RequestMapping(value="/index")
+	public ModelAndView toOrderList(HttpServletRequest request){
+		
+		
+		return new ModelAndView("/order/orderlist");
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/list")
+	public Map getOrderList(HttpServletRequest request){
+		Map map=new HashMap();
+		
+		List<Orders> list=orderService.getAllOrders();
+		Orders order=list.get(0);
+		map.put("order", order);
+		return map;
+	}
 }
