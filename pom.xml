@@ -192,11 +192,18 @@
 			<artifactId>bval-jsr303</artifactId>
 			<version>0.5</version>
 		</dependency>
-		<!-- http请求util类需要 -->
+		<!-- httpUtil类需要 -->
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
+		</dependency>
+		
+		<!-- for moniter from suZhenYu 2016 0126 1931 -->
+		<dependency>
+			<groupId>net.bull.javamelody</groupId>
+			<artifactId>javamelody-core</artifactId>
+			<version>1.40.0</version>
 		</dependency>
   </dependencies>
   <build>
