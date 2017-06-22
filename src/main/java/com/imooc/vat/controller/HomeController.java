@@ -17,6 +17,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value="/toHomeJsp")
 	public ModelAndView toHistoryInvoiceQueryJsp(){
+		log.info("user is logining home page!");
 		return new ModelAndView("/home/index");
 	}
 }

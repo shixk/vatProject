@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.vat.dao.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.vat.entity.Orders" >
+    <id column="OrderId" property="orderId" jdbcType="INTEGER" />
+    <result column="ShipmentsNo" property="shipmentsNo" jdbcType="VARCHAR" />
+    <result column="TotalPrice" property="totalPrice" jdbcType="DECIMAL" />
+    <result column="CustName" property="custName" jdbcType="VARCHAR" />
+    <result column="OrderType" property="orderType" jdbcType="VARCHAR" />
+    <result column="Mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="PayTime" property="payTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    OrderId, ShipmentsNo, TotalPrice, CustName, OrderType, Mobile, CreateTime, PayTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.imooc.vat.entity.OrdersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where OrderId = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orders
+    where OrderId = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.imooc.vat.entity.OrdersExample" >
+    delete from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.imooc.vat.entity.Orders" >
+    insert into orders (OrderId, ShipmentsNo, TotalPrice, 
+      CustName, OrderType, Mobile, 
+      CreateTime, PayTime)
+    values (#{orderId,jdbcType=INTEGER}, #{shipmentsNo,jdbcType=VARCHAR}, #{totalPrice,jdbcType=DECIMAL}, 
+      #{custName,jdbcType=VARCHAR}, #{orderType,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.vat.entity.Orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        OrderId,
+      </if>
+      <if test="shipmentsNo != null" >
+        ShipmentsNo,
+      </if>
+      <if test="totalPrice != null" >
+        TotalPrice,
+      </if>
+      <if test="custName != null" >
+        CustName,
+      </if>
+      <if test="orderType != null" >
+        OrderType,
+      </if>
+      <if test="mobile != null" >
+        Mobile,
+      </if>
+      <if test="createTime != null" >
+        CreateTime,
+      </if>
+      <if test="payTime != null" >
+        PayTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentsNo != null" >
+        #{shipmentsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.imooc.vat.entity.OrdersExample" resultType="java.lang.Integer" >
+    select count(*) from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update orders
+    <set >
+      <if test="record.orderId != null" >
+        OrderId = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shipmentsNo != null" >
+        ShipmentsNo = #{record.shipmentsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalPrice != null" >
+        TotalPrice = #{record.totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.custName != null" >
+        CustName = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderType != null" >
+        OrderType = #{record.orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        Mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payTime != null" >
+        PayTime = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update orders
+    set OrderId = #{record.orderId,jdbcType=INTEGER},
+      ShipmentsNo = #{record.shipmentsNo,jdbcType=VARCHAR},
+      TotalPrice = #{record.totalPrice,jdbcType=DECIMAL},
+      CustName = #{record.custName,jdbcType=VARCHAR},
+      OrderType = #{record.orderType,jdbcType=VARCHAR},
+      Mobile = #{record.mobile,jdbcType=VARCHAR},
+      CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+      PayTime = #{record.payTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.vat.entity.Orders" >
+    update orders
+    <set >
+      <if test="shipmentsNo != null" >
+        ShipmentsNo = #{shipmentsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        TotalPrice = #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="custName != null" >
+        CustName = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        OrderType = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        Mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        PayTime = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where OrderId = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.vat.entity.Orders" >
+    update orders
+    set ShipmentsNo = #{shipmentsNo,jdbcType=VARCHAR},
+      TotalPrice = #{totalPrice,jdbcType=DECIMAL},
+      CustName = #{custName,jdbcType=VARCHAR},
+      OrderType = #{orderType,jdbcType=VARCHAR},
+      Mobile = #{mobile,jdbcType=VARCHAR},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      PayTime = #{payTime,jdbcType=TIMESTAMP}
+    where OrderId = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>
