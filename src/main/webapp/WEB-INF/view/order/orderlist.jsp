@@ -10,6 +10,10 @@
 	<div>
 		<input type="button" value="test" onclick="test()" >
 	</div>
+	<div>
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+					iconCls="icon-edit" onclick="exportExcel();">导出</a>
+	</div>
 </body>
 </html>
 <script>
@@ -23,5 +27,29 @@ function test(){
 		     alert(data.order.custName );
 		   }
 		});
+}
+
+
+function exportExcel(){
+	var orderNo='200678910';
+	//调用后台方法
+    $.ajax({
+        type: "POST",
+        url: '<c:url value="/order/exportExcel"/>',
+        data: {orderNo:orderNo},
+        dataType: 'json',
+        success: function (response) {
+            if (response.success) {
+                var url = "<c:url value='/resources/temp/" + response.filename+"'/>";
+                window.location.href = url;
+                $.messager.alert('提示', response.Msg);
+            } else {
+                $.messager.alert('错误', response.Msg);
+            }
+        },
+        error: function (xhr) {
+            $.messager.alert('错误', "发生错误 " + xhr.status);
+        }
+    });
 }
 </script>

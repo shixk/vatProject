@@ -1,5 +1,6 @@
 package com.imooc.vat.controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.imooc.vat.entity.OrderExportResult;
 import com.imooc.vat.entity.Orders;
 import com.imooc.vat.service.OrderService;
 
@@ -38,6 +40,24 @@ public class OrderController {
 		List<Orders> list=orderService.getAllOrders();
 		Orders order=list.get(0);
 		map.put("order", order);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/exportExcel")
+	public Map exportExcel(HttpServletRequest request,String orderNo){
+		Map map=new HashMap();
+
+		try {
+			String file=orderService.ExportList(request);
+			map.put("success", true);
+			map.put("filename", file);
+			map.put("Msg", "导出成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("success", false);
+			map.put("Msg", "导出失败"+e.getMessage());
+		} 
 		return map;
 	}
 }
