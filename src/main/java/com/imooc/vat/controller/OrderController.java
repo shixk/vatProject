@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,10 @@ public class OrderController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@SuppressWarnings("rawtypes")
+	@Autowired
+	RedisTemplate redisTemplate;
 	
 	@RequestMapping(value="/index")
 	public ModelAndView toOrderList(HttpServletRequest request){
@@ -59,5 +64,22 @@ public class OrderController {
 			map.put("Msg", "导出失败"+e.getMessage());
 		} 
 		return map;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value="/setCache")
+	public String setCache(String val){
+		redisTemplate.opsForValue().set("test", val);
+		return "success";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getVal")
+	public String getCache(String key){
+		
+		String val=(String)redisTemplate.opsForValue().get(key);
+		
+		return val;
 	}
 }

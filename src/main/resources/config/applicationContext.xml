@@ -8,7 +8,18 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	
-    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+    <!-- <context:property-placeholder location="classpath:jdbc.properties,redis.properties"></context:property-placeholder> -->
+    
+    <bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:redis.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="UTF-8" />
+	</bean>
     
 	<context:component-scan base-package="com.imooc">
 		<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation" />
@@ -19,6 +30,8 @@
   	<!-- <import resource="classpath:config/dubbo-consumer.xml" />
   	<import resource="classpath:config/dubbo-provider.xml" /> -->
   	
+  	<!-- 引入redis，不需要的话可以注释该配置 -->
+  	<import resource="classpath:config/spring-redis.xml"/>
   	
   	<bean name="scheduler"
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">

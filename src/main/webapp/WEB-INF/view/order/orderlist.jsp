@@ -14,6 +14,11 @@
 		<a href="javascript:void(0)" class="easyui-linkbutton"
 					iconCls="icon-edit" onclick="exportExcel();">导出</a>
 	</div>
+	<div>
+		<input type="text" id="txtInput"  />
+		<input type="button" onclick="setCache()" value="set值" />
+		<input type="button" onclick="getCache()" value="get值" />
+	</div>
 </body>
 </html>
 <script>
@@ -51,5 +56,30 @@ function exportExcel(){
             $.messager.alert('错误', "发生错误 " + xhr.status);
         }
     });
+}
+
+
+function setCache(){
+	var inputVal=$('#txtInput').val();
+	$.ajax({
+		   type: "POST",
+		   url: '<c:url value="/order/setCache"/>',
+		   data:{val:inputVal},
+		   success: function(msg){
+		     alert(msg);
+		   }
+		});
+}
+
+function getCache(){
+	var key="test";
+	$.ajax({
+		   type: "POST",
+		   url: '<c:url value="/order/getVal"/>',
+		   data:{key:key},
+		   success: function(msg){
+		     alert(msg);
+		   }
+		});
 }
 </script>

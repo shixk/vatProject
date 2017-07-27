@@ -242,6 +242,17 @@
 			<artifactId>javamelody-core</artifactId>
 			<version>1.40.0</version>
 		</dependency>
+		<!-- 引入redis依赖 -->
+		<dependency>  
+	        <groupId>org.springframework.data</groupId>  
+	        <artifactId>spring-data-redis</artifactId>  
+	        <version>1.0.2.RELEASE</version>  
+	    </dependency>
+	    <dependency>  
+	        <groupId>redis.clients</groupId>  
+	        <artifactId>jedis</artifactId>  
+	        <version>2.1.0</version>  
+	    </dependency> 
   </dependencies>
   <build>
     <finalName>vatTemplate</finalName>
