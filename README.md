@@ -14,4 +14,4 @@
 
 该项目引入了javamelody，用于监控项目运行的各个指标。
 
-此项目做了配置的环境隔离（dev，test，product）使用maven命令，mvn -Pdev就可以针对不同环境打包项目。此配置为jenkins自动化部署提供了基础。
+此项目做了配置文件的环境隔离（dev，test，product）使用maven命令，mvn -Pdev就可以针对不同环境打包项目。此配置为jenkins自动化部署提供了基础。
