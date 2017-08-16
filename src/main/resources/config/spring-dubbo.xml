@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans     
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+           http://code.alibabatech.com/schema/dubbo
+           http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+
+	<bean id="dubboProperties"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations" value="classpath*:dubbo.properties" />
+	</bean>
+
+	<dubbo:application name="${dubbo.appname}" />
+	<!-- <dubbo:consumer filter="LogsFilter" /> -->
+	<dubbo:registry protocol="${dubbo.registry.protocol}"
+		address="${dubbo.registry.address}" file="${dubbo.registry.file}" />
+
+	<dubbo:protocol name="${dubbo.protocol}" port="${dubbo.consumer.port}" />
+
+	<dubbo:reference id="TMSOrderService"
+		interface="com.lenovo.wms.dubbo.api.wmsreceiveorder.service.TMSOrderService"
+		timeout="200000" version="1.0" loadbalance="leastactive" />
+	<dubbo:reference id="BarCodeService"
+		interface="com.lenovo.wms.dubbo.api.barcode.service.BarCodeService"
+		timeout="200000" version="1.0" loadbalance="leastactive" />
+	<dubbo:reference id="ReOrderDubboService"
+		interface="com.lenovo.wms.dubbo.api.reorder.service.ReOrderDubboService"
+		timeout="200000" version="1.0" loadbalance="leastactive" />
+</beans>
