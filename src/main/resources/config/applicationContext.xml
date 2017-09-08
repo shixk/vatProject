@@ -33,6 +33,9 @@
   	<!-- 引入redis，不需要的话可以注释该配置 -->
   	<import resource="classpath:config/spring-redis.xml"/>
   	
+  	<!-- 引入rabbitmq，不需要的话可以注释该配置 -->
+  	<import resource="classpath:config/spring-rabbitmq.xml"/>
+  	
   	<bean name="scheduler"
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="dataSource">
