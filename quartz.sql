@@ -164,5 +164,38 @@ CREATE TABLE VAT_LOCKS
     PRIMARY KEY (SCHED_NAME,LOCK_NAME)
 );
 
+-- ----------------------------
+-- Table structure for orderdetail
+-- ----------------------------
+DROP TABLE IF EXISTS `orderdetail`;
+CREATE TABLE `orderdetail` (
+  `OrderDetailId` int(11) NOT NULL AUTO_INCREMENT,
+  `ProductName` varchar(255) DEFAULT NULL,
+  `ProductCode` varchar(255) DEFAULT NULL,
+  `Quantity` int(255) DEFAULT NULL,
+  `Price` decimal(10,2) DEFAULT NULL,
+  `ShopDiscount` decimal(10,2) DEFAULT NULL,
+  `Point` decimal(10,2) DEFAULT NULL,
+  `CreateTime` datetime DEFAULT NULL,
+  `ModifyTime` datetime DEFAULT NULL,
+  `orderId` int(11) NOT NULL,
+  PRIMARY KEY (`OrderDetailId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
+  `OrderId` int(11) NOT NULL AUTO_INCREMENT,
+  `ShipmentsNo` varchar(50) DEFAULT NULL,
+  `TotalPrice` decimal(10,2) DEFAULT NULL,
+  `CustName` varchar(255) DEFAULT NULL,
+  `OrderType` varchar(10) DEFAULT NULL,
+  `Mobile` varchar(50) DEFAULT NULL COMMENT '电话',
+  `CreateTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `PayTime` datetime DEFAULT NULL COMMENT '支付时间',
+  PRIMARY KEY (`OrderId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 commit;

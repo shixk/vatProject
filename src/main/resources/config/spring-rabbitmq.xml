@@ -30,10 +30,13 @@
     		<rabbit:binding pattern="foo.*"></rabbit:binding>
     	</rabbit:bindings>
     </rabbit:topic-exchange> -->
+    
+    <!-- 消息对象json转换类 -->
+    <bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter" />  
 
     <!--定义rabbit template用于数据的接收和发送 -->
     <rabbit:template id="amqpTemplate" connection-factory="mqconnectionFactory"
-        exchange="exchangeTest" />
+        exchange="exchangeTest" message-converter="jsonMessageConverter" />
 
     <!-- 消息接收者 -->
     <bean id="messageReceiver" class="com.imooc.vat.consumer.MessageConsumer"></bean>
